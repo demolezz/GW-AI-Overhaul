@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Unreleased
+## v5.1.0 - 2021-05-22
 
 ### Added
 
@@ -18,6 +18,7 @@
 - Buffed the following unit upgrades:
   - Advanced Torpedo Launcher
   - Kraken
+  - Orbital Fabrication Bot
   - Orca
   - Phoenix
   - Solar Array
