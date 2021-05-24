@@ -1,6 +1,12 @@
 # CHANGELOG
 
-## Unreleased
+## v5.2.1 - 2021-05-24
+
+### Fixed
+
+- Advanced Fabrication Bot Upgrade Tech having too high a chance of being drawn
+
+## v5.2.0 - 2021-05-24
 
 ### Added
 
