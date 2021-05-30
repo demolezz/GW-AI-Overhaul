@@ -987,7 +987,7 @@ define({
       units: ["/pa/units/land/nuke_launcher/nuke_launcher.json"],
     },
     {
-      id: "gwaio_upgrade_skitter",
+      id: "gwaio_upgrade_firefly",
       units: ["/pa/units/air/air_scout/air_scout.json"],
     },
     {
@@ -1397,6 +1397,14 @@ define({
     {
       id: "gwaio_upgrade_orbitalfactory",
       units: ["/pa/units/orbital/orbital_factory/orbital_factory.json"],
+    },
+    {
+      id: "gwaio_enable_planetaryradar",
+      units: ["/pa/units/orbital/deep_space_radar/deep_space_radar.json"],
+    },
+    {
+      id: "gwaio_upgrade_planetaryradar",
+      units: ["/pa/units/orbital/deep_space_radar/deep_space_radar.json"],
     },
   ],
 });

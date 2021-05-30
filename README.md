@@ -125,6 +125,7 @@ From easiest to hardest:
 - Nightmare
 - Demigod
 - Godlike
+- Titan
 
 ## Compatible Loadouts
 
@@ -213,3 +214,10 @@ None.
 - WPMarshall, for the Cluster faction logo and home system
 - trialq, whose discontinued Galactic War Loadouts mod has been partially included in this mod
 - Tristan, who created the casual, iron, and diamond icons
+
+## Hall of Fame
+
+These brave Commanders have beaten GW-Uber and shall forever be remembered:
+
+- ..Iconic.. Dreadnought
+- [BRN]Ferretmaster

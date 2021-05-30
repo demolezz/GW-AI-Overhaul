@@ -1,5 +1,62 @@
 # CHANGELOG
 
+## Unreleased
+
+### Added
+
+- Titans AI will use land mines
+
+### Change
+
+- Buffed the following upgrade techs:
+  - Commander
+  - Energy Storage
+  - Firefly
+  - Metal Storage
+  - Skitter
+  - Spinner
+  - Stryker
+- When Queller AI is enabled Sub Commanders use the Q-Gold brain rather than Q-Uber
+- Overhauled the threat measures to smooth their progression
+- Updated AI Bugfixes and Enhancements to v2.6.0
+- Updated Queller AI to v5.14.0
+
+### Fixed
+
+- Pelican Upgrade Tech compatible with the Nomad Commander
+
+## v5.2.5 - 2021-05-29
+
+### Change
+
+- Orca Upgrade Tech only applies to the destroyer's surface weapon
+- Kraken Upgrade Tech only applies to the advanced submarine's surface weapon
+
+### Fixed
+
+- Advanced Energy Plant Upgrade Tech description
+- Ares Upgrade Tech not utilising its full range
+- Jig Upgrade Tech not doing what it said it did
+- Hoarder Commander wiping out its own inventory when returning to the galaxy map
+
+## v5.2.4 - 2021-05-28
+
+### Fixed
+
+- Corrected tooltip for Firefly upgrade
+
+## v5.2.3 - 2021-05-28
+
+### Fixed
+
+- Corrected tooltips for and about Planetary Radar
+
+## v5.2.2 - 2021-05-25
+
+### Fixed
+
+- Removed attack command from Nomad Commander units that don't have an offensive weapon
+
 ## v5.2.1 - 2021-05-24
 
 ### Fixed
