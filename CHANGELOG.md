@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## Unreleased
+
+### Fixed
+
+- Queller AI not doing anything after spawning
+- Removed unused files from Queller AI to reduce mod size
+
 ## v5.3.0 - 2021-05-30
 
 ### Added
