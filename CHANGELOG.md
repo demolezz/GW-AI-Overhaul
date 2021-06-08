@@ -1,11 +1,31 @@
 # CHANGELOG
 
-## Unreleased
+## v5.5.2 - 2021-06-08
+
+### Fixed
+
+- Issues with UI elements not correctly updating or displaying at all
+
+## v5.5.1 - 2021-06-07
+
+### Fixed
+
+- Tooltips for planets with a water height but no water depth
+- Leviathan Upgrade Tech not applying its changes
+
+## v5.5.0 - 2021-06-04
+
+### Change
+
+- Bosses more closely aligned to the faction personality
+
+## v5.4.1 - 2021-06-03
 
 ### Fixed
 
 - Firefly Upgrade Tech not applying one of its effects
 - Solar Array Upgrade Tech tied to a valid sound effect
+- Solar Array Upgrade Tech causing the game to hang when entering battle against The Guardians
 
 ## v5.4.0 - 2021-06-02
 
