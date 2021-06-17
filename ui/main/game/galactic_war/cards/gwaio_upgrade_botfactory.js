@@ -36,6 +36,69 @@ define([
           value: "Bot & Mobile & FactoryBuild",
         },
       ]);
+
+      inventory.addAIMods([
+        {
+          type: "factory",
+          op: "append",
+          toBuild: "AdvancedBotFabber",
+          idToMod: "builders",
+          value: "BasicBotFactory",
+        },
+        {
+          type: "factory",
+          op: "append",
+          toBuild: "AdvancedAssaultBot",
+          idToMod: "builders",
+          value: "BasicBotFactory",
+          refId: "priority",
+          refValue: 199,
+        },
+        {
+          type: "factory",
+          op: "append",
+          toBuild: "AdvancedBotCombatFabber",
+          idToMod: "builders",
+          value: "BasicBotFactory",
+        },
+        {
+          type: "factory",
+          op: "append",
+          toBuild: "AdvancedArtilleryBot",
+          idToMod: "builders",
+          value: "BasicBotFactory",
+        },
+        {
+          type: "factory",
+          op: "append",
+          toBuild: "TMLBot",
+          idToMod: "builders",
+          value: "BasicBotFactory",
+        },
+        {
+          type: "factory",
+          op: "append",
+          toBuild: "SupportCommander",
+          idToMod: "builders",
+          value: "BasicBotFactory",
+        },
+        {
+          type: "factory",
+          op: "append",
+          toBuild: "NanoSwarm",
+          idToMod: "builders",
+          value: "BasicBotFactory",
+          refId: "priority",
+          refValue: 199,
+        },
+        {
+          type: "factory",
+          op: "replace",
+          toBuild: "BasicBotFabber",
+          idToMod: "priority",
+          value: 220,
+        },
+      ]);
     },
     dull: function () {},
   };

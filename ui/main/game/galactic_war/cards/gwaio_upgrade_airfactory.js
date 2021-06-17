@@ -36,6 +36,58 @@ define([
           value: "Air & Mobile & FactoryBuild",
         },
       ]);
+
+      inventory.addAIMods([
+        {
+          type: "factory",
+          op: "append",
+          toBuild: "AdvancedAirFabber",
+          idToMod: "builders",
+          value: "BasicAirFactory",
+        },
+        {
+          type: "factory",
+          op: "append",
+          toBuild: "AdvancedBomber",
+          idToMod: "builders",
+          value: "BasicAirFactory",
+        },
+        {
+          type: "factory",
+          op: "append",
+          toBuild: "AdvancedGunship",
+          idToMod: "builders",
+          value: "BasicAirFactory",
+        },
+        {
+          type: "factory",
+          op: "append",
+          toBuild: "AdvancedFighter",
+          idToMod: "builders",
+          value: "BasicAirFactory",
+        },
+        {
+          type: "factory",
+          op: "append",
+          toBuild: "Strafer",
+          idToMod: "builders",
+          value: "BasicAirFactory",
+        },
+        {
+          type: "factory",
+          op: "replace",
+          toBuild: "BasicAirFabber",
+          idToMod: "priority",
+          value: 220,
+        },
+        {
+          type: "factory",
+          op: "replace",
+          toBuild: "AirScout",
+          idToMod: "priority",
+          value: 210,
+        },
+      ]);
     },
     dull: function () {},
   };

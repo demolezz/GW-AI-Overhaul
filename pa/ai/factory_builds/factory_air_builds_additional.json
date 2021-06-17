@@ -10,8 +10,8 @@
       "build_conditions": [
         [
           {
-            "test_type": "AloneOnPlanet",
-            "boolean": false
+            "test_type": "EnemyAirPresenceOnPlanet",
+            "boolean": true
           },
           {
             "test_type": "CanAffordBuildDemand"
@@ -32,6 +32,12 @@
             "test_type": "CanAffordBuildDemand"
           },
           {
+            "test_type": "SystemThreat",
+            "string0": "Air",
+            "compare0": ">",
+            "value0": 0
+          },
+          {
             "test_type": "UnitCountPerPlanetRadius",
             "unit_type_string0": "Air & Fighter",
             "compare0": "<",
@@ -40,8 +46,8 @@
         ],
         [
           {
-            "test_type": "AloneOnPlanet",
-            "boolean": false
+            "test_type": "EnemyAirPresenceOnPlanet",
+            "boolean": true
           },
           {
             "test_type": "CanAffordBuildDemand"
@@ -95,6 +101,62 @@
             "unit_type_string0": "Gunship",
             "compare0": "<",
             "value0": 20
+          }
+        ]
+      ]
+    },
+    {
+      "name": "Solar Drone",
+      "to_build": "SolarDrone",
+      "instance_count": 1,
+      "max_num_assisters": 15,
+      "priority": 97,
+      "builders": ["BasicAirFactory"],
+      "build_conditions": [
+        [
+          {
+            "test_type": "DesireEnergy"
+          },
+          {
+            "test_type": "CanAffordBuildDemand"
+          },
+          {
+            "test_type": "UnitCountOnPlanet",
+            "unit_type_string0": "Commander",
+            "compare0": ">",
+            "value0": 0
+          },
+          {
+            "test_type": "UnitCount",
+            "unit_type_string0": "EnergyProduction & Basic",
+            "compare0": ">=",
+            "value0": 4
+          },
+          {
+            "test_type": "UnitCount",
+            "unit_type_string0": "EnergyProduction & Advanced",
+            "compare0": "<",
+            "value0": 1
+          }
+        ],
+        [
+          {
+            "test_type": "DesireEnergy"
+          },
+          {
+            "test_type": "CanAffordBuildDemand"
+          },
+          {
+            "test_type": "UnitCountOnPlanet",
+            "unit_type_string0": "Commander",
+            "compare0": "<",
+            "value0": 1
+          },
+          {
+            "test_type": "UnitCount",
+            "unit_type_string0": "EnergyProduction & Advanced",
+            "compare0": "<",
+            "value0": 1
           }
         ]
       ]

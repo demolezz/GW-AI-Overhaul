@@ -38,6 +38,74 @@ define([
           value: "Naval & Mobile & FactoryBuild",
         },
       ]);
+
+      inventory.addAIMods([
+        {
+          type: "factory",
+          op: "append",
+          toBuild: "AdvancedNavalFabber",
+          idToMod: "builders",
+          value: "BasicNavalFactory",
+        },
+        {
+          type: "factory",
+          op: "append",
+          toBuild: "Battleship",
+          idToMod: "builders",
+          value: "BasicNavalFactory",
+        },
+        {
+          type: "factory",
+          op: "append",
+          toBuild: "MissleShip",
+          idToMod: "builders",
+          value: "BasicNavalFactory",
+        },
+        {
+          type: "factory",
+          op: "append",
+          toBuild: "MissileSub",
+          idToMod: "builders",
+          value: "BasicNavalFactory",
+        },
+        {
+          type: "factory",
+          op: "append",
+          toBuild: "HoverShip",
+          idToMod: "builders",
+          value: "BasicNavalFactory",
+        },
+        {
+          type: "factory",
+          op: "append",
+          toBuild: "DroneCarrier",
+          idToMod: "builders",
+          value: "BasicNavalFactory",
+        },
+        {
+          type: "factory",
+          op: "replace",
+          toBuild: "BasicNavalFabber",
+          idToMod: "priority",
+          value: 220,
+        },
+        {
+          type: "factory",
+          op: "replace",
+          toBuild: "Gunboat",
+          idToMod: "priority",
+          value: 210,
+          refId: "name",
+          refValue: "Gunboat - Intel",
+        },
+        {
+          type: "factory",
+          op: "replace",
+          toBuild: "SeaScout",
+          idToMod: "priority",
+          value: 210,
+        },
+      ]);
     },
     dull: function () {},
   };
