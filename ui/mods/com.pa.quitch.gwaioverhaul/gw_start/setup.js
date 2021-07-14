@@ -412,7 +412,7 @@ if (!gwaioSetupLoaded) {
 
           // gw_start.js
           model.makeGame = function () {
-            var version = "5.13.0-rc1";
+            var version = "5.13.0-rc2";
             console.log("War created using Galactic War Overhaul v" + version);
             console.log(" ---- MAKING NEW GALAXY ----");
             model.newGame(undefined);
