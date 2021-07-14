@@ -26,12 +26,13 @@ define(["shared/gw_common"], function (GW) {
         if (
           !(
             inventory.hasCard("gwc_enable_vehicles_all") ||
-            inventory.hasCard("gwc_enable_air_all")
+            inventory.hasCard("gwc_enable_air_all") ||
+            inventory.hasCard("gwaio_start_hoarder")
           )
         ) {
           chanceMod = 3;
         }
-        if (dist > 0) {
+        if (dist > 0 && !inventory.hasCard("gwaio_start_hoarder")) {
           if (context.totalSize <= GW.balance.numberOfSystems[0]) {
             chance = 25;
             if (dist > 2) chance = 200;
@@ -55,13 +56,14 @@ define(["shared/gw_common"], function (GW) {
     },
     buff: function (inventory) {
       inventory.addUnits([
+        "/pa/units/land/assault_bot/assault_bot.json",
+        "/pa/units/land/bot_aa/bot_aa.json",
+        "/pa/units/land/bot_bomb/bot_bomb.json",
         "/pa/units/land/bot_factory_adv/bot_factory_adv.json",
         "/pa/units/land/bot_factory/bot_factory.json",
-        "/pa/units/land/fabrication_bot_combat/fabrication_bot_combat.json",
-        "/pa/units/land/assault_bot/assault_bot.json",
         "/pa/units/land/bot_grenadier/bot_grenadier.json",
-        "/pa/units/land/bot_bomb/bot_bomb.json",
         "/pa/units/land/bot_tesla/bot_tesla.json",
+        "/pa/units/land/fabrication_bot_combat/fabrication_bot_combat.json",
       ]);
     },
     dull: function () {},

@@ -1,5 +1,7 @@
 # Galactic War Overhaul Readme
 
+[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/Quitch/GW-AI-Overhaul)
+
 This mod works with Planetary Annihilation: TITANS only. It changes the following elements of Galactic War:
 
 - Restore faction personalities:
@@ -33,7 +35,7 @@ This mod works with Planetary Annihilation: TITANS only. It changes the followin
 - Adds a new faction
 - Fixes all the errors in the tech cards
 - 109 new tech cards
-- Enhanced AI through AI Bugfixes and Enhancements and Queller AI
+- Multiple AI opponents to choose from
 
 Be sure to check out my guide on [adding more maps to Galactic War](https://planetaryannihilation.com/guides/galactic-war-difficulty-and-adding-more-maps/) to enhance the experience further.
 
@@ -89,20 +91,20 @@ Each system will display the following information:
 
 ### AI Buffs
 
-- **Build**: AI has Improved Fabricator Build Arms.
-- **Commander**: AI has Commander Combat Tech, Improved Commander Build Arms, and commander mine vision.
+- **Build**: AI has Improved Build Arms.
+- **Combat**: AI has Combat Tech.
 - **Cost**: AI has Fabrication Tech.
 - **Damage**: AI has Ammunition Tech.
 - **Health**: AI has Armour Tech.
 - **Speed**: AI has Engine Tech.
 
-These buffs are applied on a per-faction basis:
+These buffs are applied to commanders and then on a per-faction basis:
 
-- **Legonis Machina**: land units and factory structures
-- **Foundation**: air and naval units and factory structures
-- **Synchronous**: non-factory structures
-- **Revenants**: orbital units and structures
-- **Cluster**: basic units
+- **Legonis Machina**: vehicle units and factories
+- **Foundation**: air and naval units and factories
+- **Synchronous**: bot units and factories
+- **Revenants**: orbital units, orbital and superweapon structures
+- **Cluster**: all structures
 
 ### Commander Threat Scale
 
@@ -172,6 +174,55 @@ If you are adding new tech cards to the game and want to be compatible, then you
 
 2. Ensure your cards are in `coui://ui/main/game/galactic_war/cards/`
 
+## How to Report a Bug
+
+Use the template below:
+
+### Attestation
+
+[ ] I have verified this bug with all other mods disabled
+
+[ ] I did not create this war while using one of the documented incompatible mods
+
+### Describe the bug
+
+A clear and concise description of what the bug is.
+
+### To Reproduce
+
+Steps to reproduce the behaviour:
+
+1. Go to '...'
+2. Click on '....'
+3. Scroll down to '....'
+4. See error
+
+### Expected behaviour
+
+A clear and concise description of what you expected to happen.
+
+### Screenshots
+
+If applicable, add screenshots to help explain your problem.
+
+### GWO Info
+
+Taken from the top-right GWO panel:
+
+- Version:
+- Difficulty:
+- Size:
+- AI:
+- Options:
+
+### Additional context
+
+Add any other context about the problem here.
+
+### Logs
+
+Please attach the most recent [client and server log](https://support.planetaryannihilation.com/kb/faq.php?id=182) immediately following the bug occurring.
+
 ## FAQ
 
 **Q. Why am I not seeing the latest changes in my war?**
@@ -186,13 +237,9 @@ Both bosses and FFA factions will use Shared Armies to allow for multiple Comman
 
 Galactic War hides eco modifiers from the player list. The bounties are still being awarded. If you gain one it will show below your eco bar.
 
-**Q. Why are those turrets moving?**
-
-When the Synchronous have the speed bonus their defences will move to engage you when you get close.
-
 ## Known Issues
 
-None.
+1. Announcer states "Enemy SXX detected" when you first encounter Cluster Security.
 
 ## Recommended mods
 

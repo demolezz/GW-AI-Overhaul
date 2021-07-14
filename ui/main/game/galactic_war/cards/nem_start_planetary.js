@@ -38,16 +38,16 @@ define([
           if (inventory.getTag("global", "playerFaction") === 4)
             inventory.addMods(gwaioTech.clusterCommanders);
           inventory.addUnits([
-            "/pa/units/land/vehicle_factory/vehicle_factory.json",
-            "/pa/units/land/tank_light_laser/tank_light_laser.json",
             "/pa/units/land/aa_missile_vehicle/aa_missile_vehicle.json",
             "/pa/units/land/tank_armor/tank_armor.json",
             "/pa/units/land/tank_hover/tank_hover.json",
+            "/pa/units/land/tank_light_laser/tank_light_laser.json",
+            "/pa/units/land/vehicle_factory/vehicle_factory.json",
           ]);
           var mods = [];
           var units = [
-            "/pa/units/land/metal_extractor/metal_extractor.json",
             "/pa/units/land/metal_extractor_adv/metal_extractor_adv.json",
+            "/pa/units/land/metal_extractor/metal_extractor.json",
           ];
           units.forEach(function (unit) {
             mods.push(
@@ -128,7 +128,7 @@ define([
               type: "fabber",
               op: "new",
               toBuild: "BasicMetalExtractor",
-              idToMod: "",
+              idToMod: "", // add to every test array
               value: {
                 test_type: "CanFindPlaceToBuild",
                 string0: "BasicMetalExtractor",
@@ -138,7 +138,7 @@ define([
               type: "fabber",
               op: "new",
               toBuild: "AdvancedMetalExtractor",
-              idToMod: "",
+              idToMod: "", // add to every test array
               value: {
                 test_type: "CanFindPlaceToBuild",
                 string0: "AdvancedMetalExtractor",

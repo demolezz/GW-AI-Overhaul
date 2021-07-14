@@ -1,5 +1,158 @@
 # CHANGELOG
 
+## v5.13.0 - 2021-07-14
+
+### Added
+
+- New AI called Penchant
+  - Uses the Titans AI as a base
+  - Each enemy has a favoured style of play which is reflected in their unit choices
+  - This information is added to the enemy's personality in the intelligence panel
+  - Sub Commanders are unaffected
+
+### Change
+
+- Increased the amount of freedom procedural maps have in using water and lava
+- Increased the range of metal density and clusters used by procedural generation
+- AI selection moved to a drop-down
+- Removed code now present in the base game
+
+### Fixed
+
+- Rerolls being offered for loadouts
+- Assault Commander loadout missing the Stinger
+- Titans AI not building the Stinger from the Unit Cannon
+- Setup column being too tall for the screen causing the entire page to scroll instead of just the column - with thanks to burntcustard
+- Queller Sub Commanders not scouting on small planets when only vehicles were available
+- Titans AI not building torpedo launchers
+- AI uses Stitches again
+- Upgraded Umbrellas shooting the ground on small planets
+- Titans AI not building Stingers in Unit Cannons
+
+## v5.12.0 - 2021-07-04
+
+### Change
+
+- AI Tech
+  - Damage increased includes Commander Ammunition Tech
+  - Health increased includes Commander Armor Tech
+  - Speed increased includes Commander Engine Tech
+  - Builds faster includes Improved Commander Build Arms
+  - Enhanced combat units includes Commander Combat Tech
+  - Enhanced commanders no longer dealt
+  - Revenant tech bonuses applied to Catalysts
+- Legonis Machina and Synchronous put more emphasis on their preferred unit type
+- Uber, Platinum, and Gold personalities now adhere to the build preferences of the faction
+
+### Fixed
+
+- AI commander torpedo and AA ammo not being included in commander damage buffs
+- AI Tech speed increases not being applied to air units
+- Cluster boss commander not receiving combat tech damage bonuses
+
+## v5.11.0 - 2021-07-03
+
+### Change
+
+- Buffed the following upgrade techs:
+  - Omega
+
+### Fixed
+
+- Orbital Fabrication Bot upgrade not dealt if you're using the Orbital Commander loadout
+
+## v5.10.3 - 2021-07-02
+
+### Fixed
+
+- Galactic Map code not working
+
+## v5.10.2 - 2021-07-02
+
+### Change
+
+- Remove cards fixed by 115863
+
+### Fixed
+
+- Change to code to hopefully resolve any remaining issues with the navigation buttons on the galaxy map
+- Complete Orbital Tech being offered to Orbital, Hoarder, and Space Excavation Commanders
+
+## v5.10.1 - 2021-06-29
+
+### Fixed
+
+- Corrected name and description of Pelter Upgrade Tech
+
+## v5.10.0 - 2021-06-28
+
+### Change
+
+- AI Tech "Combat tech" now listed as "Combat units enhanced"
+- Stinger now included by default in all tech and loadouts providing basic bot units
+
+### Fixed
+
+- Buff Commander and Swarm Commander not modifying the Stinger's damage
+- Removed Stinger files and modifications now included in the base game
+
+## v5.9.0 - 2021-06-27
+
+### Added
+
+- Combat tech is now an AI Tech, increasing health, speed, and damage
+
+### Change
+
+- All difficulty levels below Uber have AI Tech appear earlier in the galaxy
+- Removed mine vision from AI's Commander Combat Tech
+- Rebalanced AI Tech:
+  - Legonis Machina only buffs tank units and factories, not bots
+  - Synchronous buffs bot units and factories, not structures
+  - Cluster buffs structures, not basic units
+
+### Fixed
+
+- Rerolls being offered for new loadouts
+- AI speed tech being applied to structures
+- ARKYD and Advanced Radar Satellite being swapped in tooltips
+- Tougher Commanders not being applied to the Cluster boss
+
+## v5.8.0 - 2021-06-23
+
+### Change
+
+- Updated Queller AI to v5.15.0
+
+## v5.7.1 - 2021-06-22
+
+### Fixed
+
+- Nomad Commander no longer prevents nuke launchers and anti-nuke launchers from building missiles
+
+## v5.7.0 - 2021-06-22
+
+### Change
+
+- AI builds Kaiju when alone and the player has the Kaiju upgrade
+- AI won't build Colonels or Mends from the basic Bot Factory when using the Bot Factory upgrade
+- AI won't use basic fabbers to build advanced economy even when it has upgrades that allow it to
+
+### Fixed
+
+- Errors and inconsistencies in base game tech cards
+  - Advanced Defense Technology
+    - Correctly adds the Advanced Torpedo Launcher to the player's unit list
+- Hoarder Commander not being offered upgrades for techs it started with access to
+- Hoarder Commander being offered tech cards for things it already had
+- Minor clash in AI modifications between the Vehicle Factory upgrade and the Leveler upgrade
+- Queller AI support for Single Laser Defense Tower upgrade
+- Planetary Radar Upgrade Tech being offered before you have the Planetary Radar
+- Radar upgrade correctly recognises that Defense Tech Commander no longer starts with Radar
+- Queller Guardians won't build T1 units from T2 factories when encountering T1 factory upgrade tech
+- Typo in Catapult upgrade description
+- Queller enemies from wars prior to v5.6.0 doing nothing after spawning
+
 ## v5.6.0 - 2021-06-20
 
 ### Added
@@ -11,8 +164,8 @@
 - Chance of being dealt Bot Anti-Air Tech is higher if you don't have other forms of mobile anti-air
 - Updated AI Bugfixes and Enhancements to v2.7.0
 - Defense Tech Commander no longer gives Radar to the commander
-- TITANS AI only builds anti-air when the enemy has air
-- TITANS AI will build the Hermes Space Probe on single planet systems
+- Titans AI only builds anti-air when the enemy has air
+- Titans AI will build the Hermes Space Probe on single planet systems
 - Vehicle Factory Upgrade Tech uses a picture of vehicle factory
 
 ### Fixed

@@ -115,7 +115,10 @@ if (!gwaioCardsLoaded) {
           model.gwaioRerollsUsed = ko.observable(
             numCardsToOffer - star.cardList().length
           );
-          if (model.gwaioRerollsUsed() >= numCardsToOffer - 1) {
+          if (
+            model.gwaioRerollsUsed() >= numCardsToOffer - 1 ||
+            (self.isLoadout && self.isLoadout())
+          ) {
             model.gwaioOfferRerolls(false);
           }
         }
@@ -176,10 +179,8 @@ if (!gwaioCardsLoaded) {
               var playerFaction = inventory.getTag("global", "playerFaction");
               _.times(2, function () {
                 var subcommander = _.sample(GWFactions[playerFaction].minions);
-                if (gwaioFunctions.quellerAIEnabled()) {
-                  subcommander.personality.ai_path =
-                    "/pa/ai_personalities/queller/q_gold";
-                }
+                subcommander.personality.ai_path =
+                  gwaioFunctions.aiPath("ally");
                 inventory.cards().push({
                   id: "gwc_minion",
                   minion: subcommander,
@@ -196,7 +197,6 @@ if (!gwaioCardsLoaded) {
             /* Start of GWAIO implementation of GWDealer */
             if (!model.gwaioDeck) model.gwaioDeck = [];
             model.gwaioDeck.push(
-              "gwaio_enable_bot_aa",
               "gwaio_enable_planetaryradar",
               "gwaio_upgrade_advancedairfactory",
               "gwaio_upgrade_advancedbotfactory",
@@ -584,11 +584,12 @@ if (!gwaioCardsLoaded) {
                         GWFactions[playerFaction].minions
                       );
                       product.unique = Math.random();
-                      if (gwaioFunctions.quellerAIEnabled()) {
-                        product.minion.personality.ai_path =
-                          "/pa/ai_personalities/queller/q_gold";
-                      }
+                      product.minion.personality.ai_path =
+                        gwaioFunctions.aiPath("ally");
                     });
+                  } else if (product.id === "gwc_add_card_slot") {
+                    product.allowOverflow = true;
+                    product.unique = Math.random();
                   }
                   game.inventory().cards.push(product);
                 });
@@ -629,6 +630,8 @@ if (!gwaioCardsLoaded) {
                 if (ok) star.cardList(result);
               });
               $.when(dealStarCards).then(function () {
+                if (model.currentSystemCardList()[0].isLoadout())
+                  model.gwaioOfferRerolls(false);
                 model.driveAccessInProgress(true);
                 GW.manifest.saveGame(game).then(function () {
                   model.driveAccessInProgress(false);

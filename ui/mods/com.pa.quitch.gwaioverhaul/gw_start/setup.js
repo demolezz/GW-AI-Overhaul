@@ -54,7 +54,7 @@ if (!gwaioSetupLoaded) {
         systemScaling: ko.observable(true),
         easierStart: ko.observable(false),
         tougherCommanders: ko.observable(false),
-        quellerAI: ko.observable(false),
+        ai: ko.observable(0).extend({ numeric: 0 }),
         paLore: ko.observable(true).extend({ local: "gwaio_lore_enabled" }),
         customDifficulty: ko.observable(false),
         difficultyName: ko.observable(""),
@@ -163,7 +163,7 @@ if (!gwaioSetupLoaded) {
         model.gwaioDifficultySettings.systemScaling();
         model.gwaioDifficultySettings.easierStart();
         model.gwaioDifficultySettings.tougherCommanders();
-        model.gwaioDifficultySettings.quellerAI();
+        model.gwaioDifficultySettings.ai();
         model.gwaioDifficultySettings.paLore();
         model.gwaioDifficultySettings.newGalaxyNeeded(true);
       });
@@ -235,6 +235,12 @@ if (!gwaioSetupLoaded) {
       $("#game-size").before(
         loadHtml(
           "coui://ui/mods/com.pa.quitch.gwaioverhaul/gw_start/size_tooltip.html"
+        )
+      );
+
+      $("#game-difficulty-label").before(
+        loadHtml(
+          "coui://ui/mods/com.pa.quitch.gwaioverhaul/gw_start/ai_dropdown.html"
         )
       );
 
@@ -406,6 +412,8 @@ if (!gwaioSetupLoaded) {
 
           // gw_start.js
           model.makeGame = function () {
+            var version = "5.13.0-rc1";
+            console.log("War created using Galactic War Overhaul v" + version);
             console.log(" ---- MAKING NEW GALAXY ----");
             model.newGame(undefined);
 
@@ -686,10 +694,6 @@ if (!gwaioSetupLoaded) {
                 faction
               ) {
                 if (ai.faction === undefined) ai.faction = faction;
-                if (model.gwaioDifficultySettings.quellerAI()) {
-                  ai.personality.ai_path =
-                    "/pa/ai_personalities/queller/q_uber";
-                }
                 ai.personality.micro_type =
                   model.gwaioDifficultySettings.microTypeChosen();
                 ai.personality.go_for_the_kill =
@@ -735,21 +739,132 @@ if (!gwaioSetupLoaded) {
                     (model.gwaioDifficultySettings.econBase() +
                       dist * model.gwaioDifficultySettings.econRatePerDist()) *
                     getRandomArbitrary(0.9, 1.1);
+
+                // Penchant AI
+                if (model.gwaioDifficultySettings.ai() === 2) {
+                  var penchantTags = [
+                    "Vanilla",
+                    "Artillery",
+                    "Fortress",
+                    "AllTerrain",
+                    "Assault",
+                    "Boomer",
+                    "Heavy",
+                    "Infernodier",
+                    "Raider",
+                    "Meta",
+                    "Sniper",
+                    "Nuker",
+                  ];
+                  var penchantExclusions = [
+                    [], // Vanilla
+                    [], // Artillery
+                    ["PenchantT1Defence", "PenchantT2Defence"], // Fortress
+                    [
+                      // AllTerrain
+                      "PenchantT1Bot",
+                      "PenchantT2Bot",
+                      "PenchantT1Vehicle",
+                      "PenchantT2Naval",
+                    ],
+                    [
+                      // Assault
+                      "PenchantT2Air",
+                      "PenchantT1Bot",
+                      "PenchantT1Vehicle",
+                      "PenchantT2Vehicle",
+                      "PenchantT1Naval",
+                      "PenchantT2Naval",
+                    ],
+                    ["PenchantT1Bot", "PenchantT2Bot"], // Boomer
+                    [
+                      // Heavy
+                      "NoPercentage",
+                      "PenchantT2Air",
+                      "PenchantT1Bot",
+                      "PenchantT2Bot",
+                      "PenchantT1Vehicle",
+                      "PenchantT2Vehicle",
+                      "PenchantT1Naval",
+                      "PenchantT2Naval",
+                    ],
+                    [
+                      // Infernodier
+                      "NoPercentage",
+                      "PenchantT1Bot",
+                      "PenchantT2Bot",
+                      "PenchantT1Vehicle",
+                      "PenchantT2Vehicle",
+                    ],
+                    [
+                      // Raider
+                      "PenchantT2Air",
+                      "PenchantT1Bot",
+                      "PenchantT2Bot",
+                      "PenchantT1Vehicle",
+                      "PenchantT1Naval",
+                      "PenchantT2Naval",
+                    ],
+                    [
+                      // Meta
+                      "NoPercentage",
+                      "PenchantT2Air",
+                      "PenchantT1Bot",
+                      "PenchantT1Vehicle",
+                      "PenchantT2Vehicle",
+                      "PenchantT1Naval",
+                      "PenchantT2Naval",
+                    ],
+                    [
+                      // Sniper
+                      "NoPercentage",
+                      "PenchantT2Air",
+                      "PenchantT1Bot",
+                      "PenchantT2Bot",
+                      "PenchantT1Vehicle",
+                      "PenchantT2Vehicle",
+                      "PenchantT1Naval",
+                      "PenchantT2Naval",
+                    ],
+                    [], // Nuker
+                  ];
+                  var penchantNames = [
+                    "",
+                    "!LOC:Artillery",
+                    "!LOC:Fortress",
+                    "!LOC:All-terrain",
+                    "!LOC:Assault",
+                    "!LOC:Boomer",
+                    "!LOC:Heavy",
+                    "!LOC:Infernodier",
+                    "!LOC:Raider",
+                    "!LOC:Meta",
+                    "!LOC:Sniper",
+                    "!LOC:Nuker",
+                  ];
+                  var penchantTag = _.sample(penchantTags);
+                  var penchantIndex = _.indexOf(penchantTags, penchantTag);
+                  ai.personality.personality_tags =
+                    ai.personality.personality_tags.concat(
+                      penchantTag,
+                      penchantExclusions[penchantIndex]
+                    );
+                  ai.penchantName = penchantNames[penchantIndex];
+                }
               };
 
-              var buffType = [0, 1, 2, 3, 4, 5]; // 0 = cost; 1 = damage; 2 = health; 3 = speed; 4 = build; 5 = commanders
+              var buffType = [0, 1, 2, 3, 4, 6]; // 0 = cost; 1 = damage; 2 = health; 3 = speed; 4 = build; 6 = combat
               var buffDelay =
                 model.gwaioDifficultySettings.factionTechHandicap();
               var aiInventory = [];
               var clusterCommanderInventory = [];
 
               if (model.gwaioDifficultySettings.tougherCommanders()) {
-                aiInventory = aiInventory.concat(
-                  gwaioTech.tougherCommanders[0]
-                );
-                clusterCommanderInventory = clusterCommanderInventory.concat(
-                  gwaioTech.tougherCommanders[1]
-                );
+                aiInventory = gwaioTech.tougherCommanders[0];
+                clusterCommanderInventory =
+                  gwaioTech.tougherCommanders[0].concat(
+                    gwaioTech.tougherCommanders[1]
+                  );
               }
 
               _.forEach(teamInfo, function (info) {
@@ -776,7 +891,7 @@ if (!gwaioSetupLoaded) {
                   if (numMinions > 0) {
                     info.boss.minions = [];
                     if (info.boss.isCluster === true) {
-                      var bossMinion = _.clone(
+                      var bossMinion = _.cloneDeep(
                         _.sample(
                           _.filter(GWFactions[info.faction].minions, {
                             name: "Security",
@@ -788,7 +903,7 @@ if (!gwaioSetupLoaded) {
                       info.boss.minions.push(bossMinion);
                     } else
                       _.times(numMinions, function () {
-                        bossMinion = _.clone(
+                        bossMinion = _.cloneDeep(
                           _.sample(GWFactions[info.faction].minions)
                         );
                         setAIData(bossMinion, maxDist, true, false);
@@ -805,20 +920,28 @@ if (!gwaioSetupLoaded) {
                       " | Commanders: " +
                       info.boss.bossCommanders +
                       " | Dist: " +
-                      maxDist
+                      maxDist +
+                      " | Buffs: " +
+                      numBuffs +
+                      " | Penchant: " +
+                      info.boss.penchantName +
+                      " | Personality: " +
+                      info.boss.personality.personality_tags
                   );
-                  if (info.boss.minions) {
-                    _.times(info.boss.minions.length, function (n) {
-                      console.log(
-                        "\tMinion: " +
-                          info.boss.minions[n].name +
-                          " | Eco: " +
-                          info.boss.minions[n].econ_rate.toPrecision(3) +
-                          " | Commanders: " +
-                          info.boss.minions[n].commanderCount
-                      );
-                    });
-                  }
+                  _.forEach(info.boss.minions, function (bossMinion) {
+                    console.log(
+                      "\tMinion: " +
+                        bossMinion.name +
+                        " | Eco: " +
+                        bossMinion.econ_rate.toPrecision(3) +
+                        " | Commanders: " +
+                        bossMinion.commanderCount +
+                        " | Penchant: " +
+                        bossMinion.penchantName +
+                        " | Personality: " +
+                        bossMinion.personality.personality_tags
+                    );
+                  });
                 }
 
                 // Setup non-boss AI system
@@ -863,7 +986,7 @@ if (!gwaioSetupLoaded) {
                   if (numMinions > 0) {
                     worker.ai.minions = [];
                     if (worker.ai.name === "Security") {
-                      var minion = _.clone(
+                      var minion = _.cloneDeep(
                         _.sample(
                           _.filter(GWFactions[info.faction].minions, {
                             name: "Worker",
@@ -885,7 +1008,7 @@ if (!gwaioSetupLoaded) {
                         );
                     else {
                       _.times(numMinions, function () {
-                        minion = _.clone(
+                        minion = _.cloneDeep(
                           _.sample(GWFactions[info.faction].minions)
                         );
                         setAIData(minion, dist, false, false);
@@ -907,7 +1030,7 @@ if (!gwaioSetupLoaded) {
                       if (worker.ai.foes === undefined) worker.ai.foes = [];
                       availableFactions = _.shuffle(availableFactions);
                       var foeFaction = availableFactions.splice(0, 1);
-                      var foeCommander = _.clone(
+                      var foeCommander = _.cloneDeep(
                         _.sample(GWFactions[foeFaction].minions)
                       );
                       var numFoes = Math.round((numMinions + 1) / 2);
@@ -943,32 +1066,42 @@ if (!gwaioSetupLoaded) {
                       " | Commanders: " +
                       worker.ai.commanderCount +
                       " | Dist: " +
-                      dist
+                      dist +
+                      " | Buffs: " +
+                      numBuffs +
+                      " | Penchant: " +
+                      worker.ai.penchantName +
+                      " | Personality: " +
+                      worker.ai.personality.personality_tags
                   );
-                  if (worker.ai.minions) {
-                    _.times(worker.ai.minions.length, function (n) {
-                      console.log(
-                        "\tMinion: " +
-                          worker.ai.minions[n].name +
-                          " | Eco: " +
-                          worker.ai.minions[n].econ_rate.toPrecision(3) +
-                          " | Commanders: " +
-                          worker.ai.minions[n].commanderCount
-                      );
-                    });
-                  }
-                  if (worker.ai.foes) {
-                    _.times(worker.ai.foes.length, function (n) {
-                      console.log(
-                        "\tFoe: " +
-                          worker.ai.foes[n].name +
-                          " | Eco: " +
-                          worker.ai.foes[n].econ_rate.toPrecision(3) +
-                          " | Commanders: " +
-                          worker.ai.foes[n].commanderCount
-                      );
-                    });
-                  }
+                  _.forEach(worker.ai.minions, function (minion) {
+                    console.log(
+                      "\tMinion: " +
+                        minion.name +
+                        " | Eco: " +
+                        minion.econ_rate.toPrecision(3) +
+                        " | Commanders: " +
+                        minion.commanderCount +
+                        " | Penchant: " +
+                        minion.penchantName +
+                        " | Personality: " +
+                        minion.personality.personality_tags
+                    );
+                  });
+                  _.forEach(worker.ai.foes, function (foe) {
+                    console.log(
+                      "\tFoe: " +
+                        foe.name +
+                        " | Eco: " +
+                        foe.econ_rate.toPrecision(3) +
+                        " | Commanders: " +
+                        foe.commanderCount +
+                        " | Penchant: " +
+                        foe.penchantName +
+                        " | Personality: " +
+                        foe.personality.personality_tags
+                    );
+                  });
                 });
               });
 
@@ -1052,7 +1185,7 @@ if (!gwaioSetupLoaded) {
                 .stars()
                 [game.galaxy().origin()].system();
               originSystem.gwaio = {};
-              originSystem.gwaio.version = "5.4.1-rc1";
+              originSystem.gwaio.version = version;
               originSystem.gwaio.difficulty =
                 model.gwaioDifficultySettings.difficultyName();
               originSystem.gwaio.galaxySize = [
@@ -1074,8 +1207,10 @@ if (!gwaioSetupLoaded) {
                 model.gwaioDifficultySettings.easierStart();
               originSystem.gwaio.tougherCommanders =
                 model.gwaioDifficultySettings.tougherCommanders();
-              if (model.gwaioDifficultySettings.quellerAI()) {
+              if (model.gwaioDifficultySettings.ai() === 1) {
                 originSystem.gwaio.ai = "Queller";
+              } else if (model.gwaioDifficultySettings.ai() === 2) {
+                originSystem.gwaio.ai = "Penchant";
               } else {
                 originSystem.gwaio.ai = "Titans";
               }

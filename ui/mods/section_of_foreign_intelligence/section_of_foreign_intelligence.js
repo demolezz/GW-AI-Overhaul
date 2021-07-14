@@ -59,13 +59,17 @@ if (!gwaioIntelligenceLoaded) {
             name = name.concat(" x", numCommanders);
             eco = eco * ((numCommanders + 1) / 2);
           }
+          if (commander.penchantName)
+            var character =
+              loc(commander.character) + " " + loc(commander.penchantName);
+          else character = loc(commander.character);
           return {
             name: name,
             threat: loc(threat(eco)),
             color: rgb(
               (commander.color && commander.color[0]) || [255, 255, 255]
             ),
-            character: loc(commander.character),
+            character: character,
             eco: eco,
             faction: faction,
           };
@@ -212,11 +216,21 @@ if (!gwaioIntelligenceLoaded) {
             return true;
         });
 
+        // v5.11.0 and earlier only
         model.gwaioEnhancedCommanders = ko.computed(function () {
           if (
             model.selection.system().star.ai() &&
             model.selection.system().star.ai().typeOfBuffs &&
             _.includes(model.selection.system().star.ai().typeOfBuffs, 5)
+          )
+            return true;
+        });
+
+        model.gwaioTechCombat = ko.computed(function () {
+          if (
+            model.selection.system().star.ai() &&
+            model.selection.system().star.ai().typeOfBuffs &&
+            _.includes(model.selection.system().star.ai().typeOfBuffs, 6)
           )
             return true;
         });
@@ -232,6 +246,7 @@ if (!gwaioIntelligenceLoaded) {
         model.gwaioAiBuffs = ko.computed(function () {
           if (
             model.gwaioTechBuild() ||
+            model.gwaioTechCombat() ||
             model.gwaioTechCost() ||
             model.gwaioEnhancedCommanders() ||
             model.gwaioTechDamage() ||

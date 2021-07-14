@@ -6,7 +6,7 @@
       "instance_count": 1,
       "max_num_assisters": 10,
       "priority": 100,
-      "builders": ["AnyUberVehicleFactory"],
+      "builders": ["BasicVehicleFactory"],
       "build_conditions": [
         [
           {
@@ -114,7 +114,7 @@
       "max_num_assisters": 10,
       "shared_instance_count": "LandScout",
       "priority": 98,
-      "builders": ["AnyUberVehicleFactory"],
+      "builders": ["BasicVehicleFactory"],
       "build_conditions": [
         [
           {
@@ -194,7 +194,7 @@
       "instance_count": 1,
       "max_num_assisters": 10,
       "priority": 97,
-      "builders": ["AnyUberVehicleFactory"],
+      "builders": ["BasicVehicleFactory"],
       "build_conditions": [
         [
           {
@@ -251,6 +251,40 @@
       ]
     },
     {
+      "name": "Stryker",
+      "to_build": "AttackVehicle",
+      "instance_count": 1,
+      "max_num_assisters": 10,
+      "priority": 97,
+      "builders": ["BasicVehicleFactory"],
+      "build_conditions": [
+        [
+          {
+            "test_type": "AloneOnPlanet",
+            "boolean": false
+          },
+          {
+            "test_type": "CanDeployLandFromBase",
+            "boolean": true
+          }
+        ],
+        [
+          {
+            "test_type": "AloneOnPlanet",
+            "boolean": true
+          },
+          {
+            "test_type": "OtherPlanetCanReceiveLandUnitAssistance",
+            "boolean": true
+          },
+          {
+            "test_type": "OtherPlanetNeedsLandUnitAssistance",
+            "boolean": true
+          }
+        ]
+      ]
+    },
+    {
       "name": "Ant",
       "to_build": "LightLaserTank",
       "instance_count": -1,
@@ -290,7 +324,7 @@
       "instance_count": -1,
       "max_num_assisters": 10,
       "priority": 97,
-      "builders": ["AnyUberVehicleFactory"],
+      "builders": ["BasicVehicleFactory"],
       "build_conditions": [
         [
           {
@@ -347,7 +381,7 @@
       "instance_count": -1,
       "max_num_assisters": 10,
       "priority": 97,
-      "builders": ["AnyUberVehicleFactory"],
+      "builders": ["BasicVehicleFactory"],
       "build_conditions": [
         [
           {
@@ -461,7 +495,7 @@
       "instance_count": -1,
       "max_num_assisters": 10,
       "priority": 97,
-      "builders": ["AnyUberVehicleFactory"],
+      "builders": ["BasicVehicleFactory"],
       "build_conditions": [
         [
           {

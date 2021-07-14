@@ -5,7 +5,7 @@ define([
     validatePaths: function (path) {
       var index = _.findIndex(gwaioUnitsToNames.units, { path: path });
       if (index === -1)
-        console.warn(path, "is invalid or missing from GWO unit_names.js");
+        console.error(path, "is invalid or missing from GWO unit_names.js");
     },
     hasUnit: function (path) {
       this.validatePaths(path);
@@ -43,12 +43,23 @@ define([
       } else
         return "coui://ui/main/game/galactic_war/shared/img/red-commander.png";
     },
-    quellerAIEnabled: function () {
+    aiEnabled: function () {
       var galaxy = model.game().galaxy();
       var originSystem = galaxy.stars()[galaxy.origin()].system();
-      if (originSystem.gwaio && originSystem.gwaio.ai === "Queller") {
-        return true;
+      if (originSystem.gwaio) {
+        return originSystem.gwaio.ai;
       }
+    },
+    aiPath: function (type) {
+      if (type === "all" && this.aiEnabled() === "Queller")
+        return "/pa/ai_personalities/queller/";
+      else if (type === "ally" && this.aiEnabled() === "Queller")
+        return "/pa/ai_personalities/queller/q_gold/";
+      else if (type === "enemy" && this.aiEnabled() === "Queller")
+        return "/pa/ai_personalities/queller/q_uber/";
+      else if (this.aiEnabled() === "Penchant")
+        return "/pa/ai_personalities/penchant/";
+      else return "/pa/ai/";
     },
   };
 });

@@ -29,7 +29,7 @@ define(["shared/gw_common"], function (GW) {
         )
       ) {
         var dist = system.distance();
-        if (dist > 0) {
+        if (dist > 0 && !inventory.hasCard("gwaio_start_hoarder")) {
           if (context.totalSize <= GW.balance.numberOfSystems[0]) {
             chance = 200;
             if (dist > 2) chance = 50;
@@ -56,8 +56,8 @@ define(["shared/gw_common"], function (GW) {
         "/pa/units/air/air_scout/air_scout.json",
         "/pa/units/air/bomber/bomber.json",
         "/pa/units/air/fighter/fighter.json",
-        "/pa/units/air/transport/transport.json",
         "/pa/units/air/solar_drone/solar_drone.json",
+        "/pa/units/air/transport/transport.json",
       ]);
     },
     dull: function () {},
