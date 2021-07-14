@@ -158,15 +158,13 @@ if (!gwaioCardsLoaded) {
             "coui://ui/mods/com.pa.quitch.gwaioverhaul/shared/bank.js",
             "coui://ui/mods/com.pa.quitch.gwaioverhaul/gw_play/card_units.js",
             "coui://ui/mods/com.pa.quitch.gwaioverhaul/gw_play/unit_names.js",
-            "coui://ui/mods/com.pa.quitch.gwaioverhaul/shared/functions.js",
           ],
           function (
             GW,
             GWFactions,
             gwaioBank,
             gwaioCardsToUnits,
-            gwaioUnitsToNames,
-            gwaioFunctions
+            gwaioUnitsToNames
           ) {
             var inventory = game.inventory();
 
@@ -179,8 +177,6 @@ if (!gwaioCardsLoaded) {
               var playerFaction = inventory.getTag("global", "playerFaction");
               _.times(2, function () {
                 var subcommander = _.sample(GWFactions[playerFaction].minions);
-                subcommander.personality.ai_path =
-                  gwaioFunctions.aiPath("ally");
                 inventory.cards().push({
                   id: "gwc_minion",
                   minion: subcommander,
@@ -584,8 +580,6 @@ if (!gwaioCardsLoaded) {
                         GWFactions[playerFaction].minions
                       );
                       product.unique = Math.random();
-                      product.minion.personality.ai_path =
-                        gwaioFunctions.aiPath("ally");
                     });
                   } else if (product.id === "gwc_add_card_slot") {
                     product.allowOverflow = true;
