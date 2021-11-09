@@ -169,8 +169,10 @@ if (!gwaioCardsLoaded) {
               !inventory.cards()[0].minions
             ) {
               var playerFaction = inventory.getTag("global", "playerFaction");
-              _.times(2, function () {
+              _.times(2, function (i) {
                 var subcommander = _.sample(GWFactions[playerFaction].minions);
+                subcommander["color"] =
+                  GWFactions[playerFaction].minionColors[i];
                 inventory.cards().push({
                   id: "gwc_minion",
                   minion: subcommander,
@@ -570,6 +572,10 @@ if (!gwaioCardsLoaded) {
                       product.minion = _.sample(
                         GWFactions[playerFaction].minions
                       );
+                      product.minion["color"] =
+                        GWFactions[playerFaction].minionColors[
+                          game.inventory().cards()[0].minions
+                        ];
                       product.unique = Math.random();
                     });
                   } else if (product.id === "gwc_add_card_slot") {

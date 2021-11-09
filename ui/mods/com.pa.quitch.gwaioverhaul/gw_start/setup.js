@@ -3,6 +3,25 @@ var gwaioSetupLoaded;
 if (!gwaioSetupLoaded) {
   gwaioSetupLoaded = true;
 
+  function getMinion(faction, currentMinionCount) {
+    return getMinionFiltered(faction, currentMinionCount, null);
+  }
+
+  function getMinionFiltered(faction, currentMinionCount, filter) {
+    var minion;
+
+    if (filter) {
+      minion = _.filter(faction.minions, {
+        name: filter,
+      });
+    } else {
+      minion = _.sample(faction.minions);
+    }
+
+    minion["color"] = faction.minionColors[currentMinionCount];
+    return minion;
+  }
+
   function gwaioSetup() {
     try {
       ko.extenders.decimals = function (target, decimals) {
@@ -888,22 +907,24 @@ if (!gwaioSetupLoaded) {
                     if (info.boss.isCluster === true) {
                       var bossMinion = _.cloneDeep(
                         _.sample(
-                          _.filter(GWFactions[info.faction].minions, {
-                            name: "Security",
-                          })
+                          getMinionFiltered(
+                            GWFactions[info.faction],
+                            numMinions,
+                            "Security"
+                          )
                         )
                       );
                       setAIData(bossMinion, maxDist, true, false);
                       bossMinion.commanderCount = numMinions;
                       info.boss.minions.push(bossMinion);
                     } else
-                      _.times(numMinions, function () {
+                      for (var i = 0; i < numMinions; i++) {
                         bossMinion = _.cloneDeep(
-                          _.sample(GWFactions[info.faction].minions)
+                          _.sample(getMinion(GWFactions[info.faction], i))
                         );
                         setAIData(bossMinion, maxDist, true, false);
                         info.boss.minions.push(bossMinion);
-                      });
+                      }
                   }
                   console.log(
                     "BOSS: " +
@@ -983,9 +1004,11 @@ if (!gwaioSetupLoaded) {
                     if (worker.ai.name === "Security") {
                       var minion = _.cloneDeep(
                         _.sample(
-                          _.filter(GWFactions[info.faction].minions, {
-                            name: "Worker",
-                          })
+                          getMinionFiltered(
+                            GWFactions[info.faction],
+                            numMinions,
+                            "Worker"
+                          )
                         )
                       );
                       setAIData(minion, dist, false, false, _, numMinions);
@@ -1002,9 +1025,9 @@ if (!gwaioSetupLoaded) {
                           model.gwaioDifficultySettings.bossCommanders() / 2
                         );
                     else {
-                      _.times(numMinions, function () {
+                      _.times(2, function (i) {
                         minion = _.cloneDeep(
-                          _.sample(GWFactions[info.faction].minions)
+                          getMinion(GWFactions[info.faction], i)
                         );
                         setAIData(minion, dist, false, false, _, numMinions);
                         worker.ai.minions.push(minion);
@@ -1026,7 +1049,7 @@ if (!gwaioSetupLoaded) {
                       availableFactions = _.shuffle(availableFactions);
                       var foeFaction = availableFactions.splice(0, 1);
                       var foeCommander = _.cloneDeep(
-                        _.sample(GWFactions[foeFaction].minions)
+                        getMinion(GWFactions[foeFaction], numMinions)
                       );
                       var numFoes = Math.round((numMinions + 1) / 2);
                       if (foeCommander.name === "Worker") {
